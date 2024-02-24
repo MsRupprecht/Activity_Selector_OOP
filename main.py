@@ -125,8 +125,8 @@ print("\nInhala, exhala...\n")
 #breath(3)
 
 
-print("Hello Sunshine!  What are you looking for today?")
-need = input("1: Rescue \n2: Plan my day\n>>")
+print("Hello Sunshine!  What do you need today?")
+need = input("1: Rescue \n2: A bit of guidance planning my day\n>>")
 
 # Select which mode - Rescue or Planning
 typo1 = True
@@ -136,6 +136,7 @@ while typo1 == True:
         typo1 = False
         num = random.randint(0,len(rescue_options)-1)
         print(rescue_options[num])
+
 
     # Planning Mode
     elif need == "2":
@@ -168,7 +169,7 @@ while typo1 == True:
         typo3 = True
         while typo3 == True:
             energy_list = []
-            energy = input("What is your energy level?\n1: Passive\n2: Relaxed\n3: Mentally Active\n4: Physically Active\n>>")
+            energy = input("What is your energy level?\n1: Passive\n2: Relaxed\n3: Mentally Active\n4: Physically Active\n5: Any level\n>>")
             if energy == "1":
                 typo3 = False
                 for n in range(len(location_list)):
@@ -189,19 +190,36 @@ while typo1 == True:
                 for n in range(len(location_list)):
                     if location_list[n].energy == "physically active":
                         energy_list.append(location_list[n])
+            elif energy == "5":
+                typo3 = False
+                energy_list = location_list
             else:
                 print("Please try again.")
         
-        # typo4 = True
-        # while typo4 == True:
-        #     theme_list = []
-        #     print("Which activity types would you like to consider?")
-            
-
-
-
-
+        # Menu to select themes and narrow results
+        theme_list = []
+        themes_to_include = []
+        print("Which activity types would you like to consider?\nRespond with Y or N")
+        for theme in available_themes:
+            typo4 = True
+            while typo4 == True:
+                include = input(theme.capitalize()+"?")
+                if include == "Y" or include == "y":
+                    themes_to_include.append(theme)
+                    typo4 = False
+                elif include == "N" or include == "n":
+                    typo4 = False
+                else:
+                    print("Please try again.")
+        
+        for theme in themes_to_include:
+            for task in energy_list:
+                if task.theme == theme:
+                    theme_list.append(task)
     else:
         need = input("Try again please\n1: Rescue \n2: Plan my day\n>>")
+
+num = random.randint(0,len(energy_list))
+print(energy_list[num])
 
 print("You've got this!")
