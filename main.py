@@ -2,9 +2,10 @@ import time
 import random
 from activities import Activity
 
-## Instantiating each activity
+## Instantiating each activity and empty lists
 
 full_options = []
+available_themes = []
 
 # Reading
 read1 = Activity("Read a Rick Riordan book.", "any", "reading", "relaxed")
@@ -21,6 +22,7 @@ learn3 = Activity("Work on French study guides", "any", "learning", "mentally ac
 learn1.set_list(full_options)
 learn2.set_list(full_options)
 learn3.set_list(full_options)
+
 
 # Computing
 comp1 = Activity("Further develop my activity selector", "any", "computing", "mentally active")
@@ -99,8 +101,10 @@ rescue4.set_list(rescue_options)
 rescue5.set_list(rescue_options)
 rescue6.set_list(rescue_options)
 
+# Create master list of available themes
+Activity.get_available_themes(full_options,available_themes)
 
-
+# Subroutines
 def breath(repeat):
     for n in range (repeat):
         inhala = "Inhala"
@@ -119,40 +123,81 @@ def breath(repeat):
 
 print("\nInhala, exhala...\n")
 #breath(3)
+
+
 print("Hello Sunshine!  What are you looking for today?")
 need = input("1: Rescue \n2: Plan my day\n>>")
 
 # Select which mode - Rescue or Planning
 typo1 = True
 while typo1 == True:
+    # Rescue Mode
     if need == "1":
         typo1 = False
         num = random.randint(0,len(rescue_options)-1)
         print(rescue_options[num])
 
+    # Planning Mode
     elif need == "2":
         typo1 = False
+        
+        # Menu to select location and narrow results
         typo2 = True
         while typo2 == True:
             location_list = []
             location = input("Where do you want to be?\n1: Inside\n2: Outside\n3: Either\n>>")
             if location == "1":
                 typo2 = False
-                for n in range(len(full_options)-1):
-                    if full_options[n].location == "inside":
+                for n in range(len(full_options)):
+                    if full_options[n].location == "inside" or full_options[n].location == "any":
                         location_list.append(full_options[n])
             elif location == "2":
                 typo2 = False
-                for n in range(len(full_options)-1):
-                    if full_options[n].location == "outside":
+                for n in range(len(full_options)):
+                    if full_options[n].location == "outside" or full_options[n].location == "any":
                         location_list.append(full_options[n])
             elif location == "3":
                 typo2 = False
-                for n in range(len(full_options)-1):
+                for n in range(len(full_options)):
                     if full_options[n].location == "any":
                         location_list.append(full_options[n])
             else:
                 print("Please try again.")
+        
+        # Menu to select energy and narrow results
+        typo3 = True
+        while typo3 == True:
+            energy_list = []
+            energy = input("What is your energy level?\n1: Passive\n2: Relaxed\n3: Mentally Active\n4: Physically Active\n>>")
+            if energy == "1":
+                typo3 = False
+                for n in range(len(location_list)):
+                    if location_list[n].energy == "passive":
+                        energy_list.append(location_list[n])
+            elif energy == "2":
+                typo3 = False
+                for n in range(len(location_list)):
+                    if location_list[n].energy == "relaxed":
+                        energy_list.append(location_list[n])
+            elif energy == "3":
+                typo3 = False
+                for n in range(len(location_list)):
+                    if location_list[n].energy == "mentally active":
+                        energy_list.append(location_list[n])
+            elif energy == "4":
+                typo3 = False
+                for n in range(len(location_list)):
+                    if location_list[n].energy == "physically active":
+                        energy_list.append(location_list[n])
+            else:
+                print("Please try again.")
+        
+        # typo4 = True
+        # while typo4 == True:
+        #     theme_list = []
+        #     print("Which activity types would you like to consider?")
+            
+
 
 
 

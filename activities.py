@@ -36,5 +36,10 @@ class Activity():
     def __str__(self):
         return f"{self.name}"
     
-    def set_list(self,list):
+    def set_list(self, list):
         list.append(self)
+    
+    def get_available_themes(main_list, sub_list):
+        for activity in main_list:
+            if activity.theme not in sub_list:
+                sub_list.append(activity.theme)
