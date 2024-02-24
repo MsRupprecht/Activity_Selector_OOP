@@ -1,6 +1,8 @@
+import time
 from activities import Activity
 
-# Instantiating each activity
+
+## Instantiating each activity
 
 # Reading
 read1 = Activity("Read a Rick Riordan book.", "any", "reading", "relaxed")
@@ -43,10 +45,48 @@ media2 = Activity("Watch two episodes of Ms. Marvel", "inside", "media", "passiv
 media3 = Activity("Watch the first Harry Potter that comes up on Netflix", "inside", "media", "passive")
 media4 = Activity("Watch two more episodes of the last program I watched", "inside", "media", "passive")
 
-# Rescue
+# Instantiating the rescue activities
 rescue1 = Activity("Remember the 4 Us: unimportant, unlikely, uncertain, uncontrollable.  Worrying will not give me certainty or control.", "inside", "rescue", "mentally active")
 rescue2 = Activity("Make a worry list, categorise what can be addressed and what needs to be let go, make a plan", "inside", "rescue", "mentally active")
 rescue3 = Activity("Look at my autumn/winter Instagram for visualisation", "any","rescue","passive")
 rescue4 = Activity("Listen to some Christmas or lofi music", "any", "rescue", "passive")
 rescue5 = Activity("Organise a corner of the room I'm in", "inside", "rescue", "relaxed")
 rescue6 = Activity("Gather blankets and buddies and have a snuggle and  rest", "inside", "rescue", "passive")
+
+
+
+def breath(repeat):
+    for n in range (repeat):
+        inhala = "Inhala"
+        exhala = "Exhala"
+        for n in range(len(inhala)):
+            print (inhala[n], end = " ", flush = True)
+            time.sleep(0.8)
+        print("")
+        for n in range(len(exhala)):
+            print (exhala[n], end = " ", flush = True)
+            time.sleep(1)
+        print("\n")
+
+
+# Starting the program
+
+print("\nInhala, exhala...\n")
+#breath(3)
+
+print("Hello Sunshine!  What are you looking for today?")
+need = input("1: Rescue \n2: Plan my day\n>>")
+typo = True
+
+while typo == True:
+    if need == "1":
+        typo = False
+        print("Rescue stuff`")
+        
+    elif need == "2":
+        typo = False
+        print("Options for activities")
+
+    else:
+        need = input("Try again please\n1: Rescue \n2: Plan my day\n>>")
+print("out of loop")
