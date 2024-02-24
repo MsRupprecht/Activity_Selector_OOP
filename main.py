@@ -129,20 +129,28 @@ while typo1 == True:
         typo1 = False
         num = random.randint(0,len(rescue_options)-1)
         print(rescue_options[num])
+
     elif need == "2":
         typo1 = False
         typo2 = True
         while typo2 == True:
+            location_list = []
             location = input("Where do you want to be?\n1: Inside\n2: Outside\n3: Either\n>>")
             if location == "1":
                 typo2 = False
-                print("insides")
+                for n in range(len(full_options)-1):
+                    if full_options[n].location == "inside":
+                        location_list.append(full_options[n])
             elif location == "2":
                 typo2 = False
-                print("outsides")
+                for n in range(len(full_options)-1):
+                    if full_options[n].location == "outside":
+                        location_list.append(full_options[n])
             elif location == "3":
                 typo2 = False
-                print("either")
+                for n in range(len(full_options)-1):
+                    if full_options[n].location == "any":
+                        location_list.append(full_options[n])
             else:
                 print("Please try again.")
 
