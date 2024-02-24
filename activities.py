@@ -2,16 +2,13 @@
 
 ## Creating the activity class
 class Activity():
-    activity_list=[]
 
     def __init__(self,name, location, theme, energy):
         self.name = name
         self.location = location
         self.theme = theme
         self.energy = energy
-        
-        Activity.activity_list.append(self)
-    
+            
     def get_name(self):
         return self.name
     
@@ -38,3 +35,6 @@ class Activity():
     
     def __str__(self):
         return f"{self.name}"
+    
+    def set_list(self,list):
+        list.append(self)
