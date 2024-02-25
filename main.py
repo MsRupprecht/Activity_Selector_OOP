@@ -125,8 +125,9 @@ print("\nInhala, exhala...\n")
 #breath(3)
 
 
-print("Hello Sunshine!  What do you need today?")
-need = input("1: Rescue \n2: A bit of guidance planning my day\n>>")
+print("Hello Sunshine!  I'm proud of you for reaching out for help.")
+print("How involved do you want to be in the decision making?")
+need = input("1: No more choices, please  \n2: I'll give a bit of guidance \n3: I'll pick the categories if you pick the final activity\n>>")
 
 # Select which mode - Rescue or Planning
 typo1 = True
@@ -136,9 +137,8 @@ while typo1 == True:
         typo1 = False
         num = random.randint(0,len(rescue_options)-1)
         print(rescue_options[num])
-
-
-    # Planning Mode
+    
+    # Guidance and Planning Mode
     elif need == "2":
         typo1 = False
         
@@ -192,11 +192,17 @@ while typo1 == True:
                         energy_list.append(location_list[n])
             elif energy == "5":
                 typo3 = False
-                energy_list = location_list
+                enerty_list = location_list
             else:
-                print("Please try again.")
+                print("Please try again.") 
+        final_list = energy_list
+        num = random.randint(0,len(final_list)-1)
+        print(final_list[num])    
         
+        # Planning Mode Only
         # Menu to select themes and narrow results
+    elif need == "3":
+        typo1 = False
         theme_list = []
         themes_to_include = []
         print("Which activity types would you like to consider?\nRespond with Y or N")
@@ -212,14 +218,15 @@ while typo1 == True:
                 else:
                     print("Please try again.")
         
-        for theme in themes_to_include:
-            for task in energy_list:
-                if task.theme == theme:
-                    theme_list.append(task)
-    else:
-        need = input("Try again please\n1: Rescue \n2: Plan my day\n>>")
+        for i in range(len(themes_to_include)):
+            for j in range(len(full_options)):
+                if full_options[j].theme == themes_to_include[i]:
+                    theme_list.append(full_options[j])
+        final_list = theme_list
 
-num = random.randint(0,len(energy_list))
-print(energy_list[num])
+        num = random.randint(0,len(final_list)-1)
+        print(final_list[num])
+    else:
+        need = input("Try again please\n1: No more choices, please  \n2: I'll give a bit of guidance \n3: I'll pick the categories if you pick the final activity\n>>")
 
 print("You've got this!")
