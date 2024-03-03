@@ -212,7 +212,7 @@ while typo1 == True:
         
         for i in range(len(themes_to_include)):
             for j in range(len(full_options)):
-                if full_options[j].theme == themes_to_include[i]:
+                if Activity.get_theme(full_options[j]) == themes_to_include[i]:
                     theme_list.append(full_options[j])
         final_list = theme_list
 
