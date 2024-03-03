@@ -217,8 +217,11 @@ while typo1 == True:
         final_list = theme_list
 
         num = random.randint(0,len(final_list)-1)
+        print("")
         print(final_list[num])
     else:
         need = input("Try again please\n1: No more choices, please  \n2: I'll give a bit of guidance \n3: I'll pick the categories if you pick the final activity\n>>")
-
+print("")
 print("You've got this!")
+print("")
+print("")
