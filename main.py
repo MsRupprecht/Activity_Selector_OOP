@@ -25,24 +25,26 @@ learn3.set_list(full_options)
 
 
 # Computing
-comp1 = Activity("Further develop my activity selector", "any", "computing", "mentally active")
+comp1 = Activity("Further develop your activity selector", "any", "computing", "mentally active")
 comp2 = Activity("Start an HTML/CSS course", "inside", "computing", "mentally active")
 comp3 = Activity("Investigate Flask/Django for deploying Python to the web", "inside", "computing", "mentally active")
-comp4 = Activity("Put together a portfolio to show the development of my activity selector", "inside", "computing", "mentally active")
-comp5 = Activity("Further develop my seating plan spreadsheet", "any", "computing", "mentally active")
+comp4 = Activity("Put together a portfolio to show the development of your activity selector", "inside", "computing", "mentally active")
+comp5 = Activity("Further develop your seating plan spreadsheet", "inside", "computing", "mentally active")
+comp6 = Activity("Work on your Python Bootcamp Udemy course", "inside", "computing", "mentally active")
 comp1.set_list(full_options)
 comp2.set_list(full_options)
 comp3.set_list(full_options)
 comp4.set_list(full_options)
 comp5.set_list(full_options)
+comp6.set_list(full_options)
 
 
 # Crafting
-craft1 = Activity("Baste and stitch my EPP hexies", "any", "crafting", "relaxed")
-craft2 = Activity("Construct my EPP school bag", "inside", "crafting", "relaxed")
+craft1 = Activity("Baste and stitch your EPP hexies", "any", "crafting", "relaxed")
+craft2 = Activity("Construct your EPP school bag", "inside", "crafting", "relaxed")
 craft3 = Activity("Crochet new scrunchies", "any", "crafting", "relaxed")
-craft4 = Activity("Work on my Christmas Tree cross-stitch", "inside", "crafting", "relaxed")
-craft5 = Activity("Outline next steps for my miniature library", "any", "crafting", "mentally active")
+craft4 = Activity("Work on your Christmas Tree cross-stitch", "inside", "crafting", "relaxed")
+craft5 = Activity("Outline next steps for your miniature library", "any", "crafting", "mentally active")
 craft1.set_list(full_options)
 craft2.set_list(full_options)
 craft3.set_list(full_options)
@@ -81,20 +83,17 @@ media3.set_list(full_options)
 media4.set_list(full_options)
 
 # Instantiating the rescue activities
-rescue1 = Activity("Remember the 4 Us: unimportant, unlikely, uncertain, uncontrollable.  Worrying will not give me certainty or control.", "inside", "rescue", "mentally active")
 rescue2 = Activity("Make a worry list, categorise what can be addressed and what needs to be let go, make a plan", "inside", "rescue", "mentally active")
-rescue3 = Activity("Look at my autumn/winter Instagram for visualisation", "any","rescue","passive")
-rescue4 = Activity("Listen to some Christmas or lofi music", "any", "rescue", "passive")
-rescue5 = Activity("Organise a corner of the room I'm in", "inside", "rescue", "relaxed")
-rescue6 = Activity("Gather blankets and buddies and have a snuggle", "inside", "rescue", "passive")
-rescue1.set_list(full_options)
+rescue3 = Activity("Look at your autumn/winter Instagram for visualisation.", "any","rescue","passive")
+rescue4 = Activity("Listen to some Christmas or lofi music.", "any", "rescue", "passive")
+rescue5 = Activity("Organise a corner of the room you are in.", "inside", "rescue", "relaxed")
+rescue6 = Activity("Gather blankets and buddies and have a snuggle.", "inside", "rescue", "passive")
 rescue3.set_list(full_options)
 rescue3.set_list(full_options)
 rescue4.set_list(full_options)
 rescue5.set_list(full_options)
 rescue6.set_list(full_options)
 rescue_options = []
-rescue1.set_list(rescue_options)
 rescue3.set_list(rescue_options)
 rescue3.set_list(rescue_options)
 rescue4.set_list(rescue_options)
@@ -122,7 +121,7 @@ def breath(repeat):
 # Starting the program
 
 print("\nInhala, exhala...\n")
-#breath(3)
+breath(2)
 
 
 print("Hello Sunshine!  I'm proud of you for reaching out for help.")
@@ -136,7 +135,12 @@ while typo1 == True:
     if need == "1":
         typo1 = False
         num = random.randint(0,len(rescue_options)-1)
-        print(rescue_options[num])
+        print("")
+        print("First, think about the 4 U's.  Is your concern unimportant, unlikely, uncertain or uncontrollable?")
+        print("Remember that worrying will not give you certainty or control.\n")
+        print("Then your next step:")
+        print("     "+str(rescue_options[num]))
+        print("")
     
     # Guidance and Planning Mode
     elif need == "2":
@@ -149,19 +153,15 @@ while typo1 == True:
             location = input("Where do you want to be?\n1: Inside\n2: Outside\n3: Either\n>>")
             if location == "1":
                 typo2 = False
-                for n in range(len(full_options)):
-                    if full_options[n].location == "inside" or full_options[n].location == "any":
-                        location_list.append(full_options[n])
+                Activity.narrow_by_attribute(full_options, location_list,"location","inside")
+                Activity.narrow_by_attribute(full_options, location_list, "location", "any")
             elif location == "2":
                 typo2 = False
-                for n in range(len(full_options)):
-                    if full_options[n].location == "outside" or full_options[n].location == "any":
-                        location_list.append(full_options[n])
+                Activity.narrow_by_attribute(full_options, location_list, "location", "outside")
+                Activity.narrow_by_attribute(full_options, location_list, "location", "any")
             elif location == "3":
                 typo2 = False
-                for n in range(len(full_options)):
-                    if full_options[n].location == "any":
-                        location_list.append(full_options[n])
+                Activity.narrow_by_attribute(full_options, location_list, "location", "any")
             else:
                 print("Please try again.")
         
@@ -172,27 +172,19 @@ while typo1 == True:
             energy = input("What is your energy level?\n1: Passive\n2: Relaxed\n3: Mentally Active\n4: Physically Active\n5: Any level\n>>")
             if energy == "1":
                 typo3 = False
-                for n in range(len(location_list)):
-                    if location_list[n].energy == "passive":
-                        energy_list.append(location_list[n])
+                Activity.narrow_by_attribute(location_list, energy_list, "energy", "passive")
             elif energy == "2":
                 typo3 = False
-                for n in range(len(location_list)):
-                    if location_list[n].energy == "relaxed":
-                        energy_list.append(location_list[n])
+                Activity.narrow_by_attribute(location_list,energy_list,"energy","relaxed")
             elif energy == "3":
                 typo3 = False
-                for n in range(len(location_list)):
-                    if location_list[n].energy == "mentally active":
-                        energy_list.append(location_list[n])
+                Activity.narrow_by_attribute(location_list, energy_list, "energy", "mentally active")
             elif energy == "4":
                 typo3 = False
-                for n in range(len(location_list)):
-                    if location_list[n].energy == "physically active":
-                        energy_list.append(location_list[n])
+                Activity.narrow_by_attribute(location_list, energy_list, "energy", "physically active")
             elif energy == "5":
                 typo3 = False
-                enerty_list = location_list
+                energy_list = location_list
             else:
                 print("Please try again.") 
         final_list = energy_list

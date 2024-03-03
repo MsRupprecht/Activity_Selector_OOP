@@ -43,3 +43,8 @@ class Activity():
         for activity in main_list:
             if activity.theme not in sub_list:
                 sub_list.append(activity.theme)
+    
+    def narrow_by_attribute(input_list, output_list, attribute, filter):
+        for n in range(len(input_list)):
+            if getattr(input_list[n],attribute) == filter:
+                output_list.append(input_list[n])
